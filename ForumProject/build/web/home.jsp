@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="vi">
     <head>
@@ -132,13 +133,13 @@
                                     <c:forEach items="${listplayer}" var="lpl">
                                         <c:if test="${lpl.getId() == lpo.getUser_id()}">
                                             <c:if test="${lpl.getAdmin() == 1 || lpl.getAdmin() == 2}">
-                                                từ <b style="color: #1E5B7E">${lpl.getDisplayname()}</b> <i style="color: #666666">Trả lời: ${lpo.getReply()} - Xem: ${lpo.getView()}<span style="color:red"> [♥ ${lpo.getLike()}]</span></i>
+                                                từ <b style="color: #1E5B7E">${lpl.getDisplayname()}</b> <i style="color: #666666">Trả lời: ${lpo.getReply()} - Xem: ${lpo.getView()}<span style="color:red"> [♥ <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${lpo.getLike()}" />]</span></i>
                                             </c:if>
                                             <c:if test="${lpl.getAdmin() == 3}">
-                                                từ <b style="color: #1E5B7E">${lpl.getUsername()}</b> <i style="color: #666666">Trả lời: ${lpo.getReply()} - Xem: ${lpo.getView()}<span style="color:red"> [♥ ${lpo.getLike()}]</span></i>
+                                                từ <b style="color: #1E5B7E">${lpl.getUsername()}</b> <i style="color: #666666">Trả lời: ${lpo.getReply()} - Xem: ${lpo.getView()}<span style="color:red"> [♥ <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${lpo.getLike()}" />]</span></i>
                                             </c:if>
                                             <c:if test="${lpl.getAdmin() == 0}">
-                                                bởi <b style="color: #1E5B7E">${lpl.getUsername()}</b> <i style="color: #666666">Trả lời: ${lpo.getReply()} - Xem: ${lpo.getView()}<span style="color:red"> [♥ ${lpo.getLike()}]</span></i>
+                                                bởi <b style="color: #1E5B7E">${lpl.getUsername()}</b> <i style="color: #666666">Trả lời: ${lpo.getReply()} - Xem: ${lpo.getView()}<span style="color:red"> [♥ <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${lpo.getLike()}" />]</span></i>
                                             </c:if>
                                         </c:if>
                                     </c:forEach>

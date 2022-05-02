@@ -148,17 +148,47 @@
                                         </div>
                                     </div>
                                     <div class="row" style="font-size: 10px; padding: 5px 7px;">
-                                        <div class="col">
-                                            <span style="color:red">♥ ${getposts.getLike()}</span> lượt thích
-                                        </div>
+                                        <c:if test="${sessionScope.player != null}">
+                                            <c:set var="count" value="${0}"></c:set>
+                                            <c:forEach items="${getposts.getList_userID_liked()}" var="lul">
+                                                <c:if test="${lul == sessionScope.player.getId()}">
+                                                    <c:set var="count" value="${count + 1}"></c:set>
+                                                </c:if>
+                                            </c:forEach>
+                                            <c:choose>
+                                                <c:when test="${count == 0}">
+                                                    <div class="col">
+                                                        <span style="color:red">♥ <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${getposts.getLike()}" /></span> lượt thích
+
+                                                    </div>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <div class="col">
+                                                        <span style="color:red">♥ <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${getposts.getLike()}" /></span> Bạn đã thích bài này
+                                                    </div>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:if>
+                                        <c:if test="${sessionScope.player == null}">
+                                            <div class="col">
+                                                <span style="color:red">♥ <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${getposts.getLike()}" /></span> lượt thích
+                                            </div>
+                                        </c:if>
 
                                         <c:if test="${sessionScope.player != null}">
-                                            ${getposts.getList_userID_liked()}
-                                            <div class="col text-right">
-                                                <a style="float:right;padding-right: 3px;" href="topics?action=like&&id=${getposts.getId()}">
-                                                    <img src="app/view/images/button/heart.png" alt=""/>
-                                                </a>
-                                            </div>
+                                            <c:set var="count" value="${0}"></c:set>
+                                            <c:forEach items="${getposts.getList_userID_liked()}" var="lul">
+                                                <c:if test="${lul == sessionScope.player.getId()}">
+                                                    <c:set var="count" value="${count + 1}"></c:set>
+                                                </c:if>
+                                            </c:forEach>
+                                            <c:if test="${count == 0}">
+                                                <div class="col text-right">
+                                                    <a style="float:right;padding-right: 3px;" href="topics?action=like&&id=${getposts.getId()}">
+                                                        <img src="app/view/images/button/heart.png" alt=""/>
+                                                    </a>
+                                                </div>
+                                            </c:if>
                                         </c:if>
 
                                     </div>
@@ -253,33 +283,61 @@
                                                     <img src="http://ngocrongonline.com/images/banner_2.png" >
                                                 </div> /-->
 
-                                                <div class="item col-sm-6 col-md-4 mb-3">
-                                                    <a href="http://ngocrongonline.com/images/banner_2.png" class="fancybox" data-fancybox="gallery">
-                                                        <img src="http://ngocrongonline.com/images/banner_2.png" width="100%" height="100%">
-                                                    </a>
-                                                </div>
-                                                <div class="item col-sm-6 col-md-4 mb-3">
-                                                    <a href="https://animehay.club/upload/poster/2451.png" class="fancybox" data-fancybox="gallery">
-                                                        <img src="https://animehay.club/upload/poster/2451.png" width="50%" height="50%">
-                                                    </a>
-                                                </div>
-
+                                                <c:if test="${lc.getLinkImg() != null}">
+                                                    <div class="text-center">
+                                                        <div class="item col-sm-6 col-md-4 mb-3">
+                                                            <a href="${lc.getLinkImg()}" class="fancybox" data-fancybox="gallery">
+                                                                <img src="${lc.getLinkImg()}" width="100%" height="100%">
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </c:if>
                                             </div>
+
                                         </div>
                                         <div class="row" style="font-size: 10px; padding: 5px 7px;">
-                                            <div class="col">
-                                                <span style="color:red">♥ ${lc.getLike()}</span> lượt thích
-                                            </div>
-
                                             <c:if test="${sessionScope.player != null}">
-                                                <div class="col text-right">
-                                                    <a style="float:right;padding-right: 3px;" href="topics?action=like&&id=${lc.getId()}">
-                                                        <img src="app/view/images/button/heart.png" alt=""/>
-                                                    </a>
+                                                <c:set var="count" value="${0}"></c:set>
+                                                <c:forEach items="${lc.getList_userID_liked()}" var="lul">
+                                                    <c:if test="${lul == sessionScope.player.getId()}">
+                                                        <c:set var="count" value="${count + 1}"></c:set>
+                                                    </c:if>
+                                                </c:forEach>
+                                                <c:choose>
+                                                    <c:when test="${count == 0}">
+                                                        <div class="col">
+                                                            <span style="color:red">♥ <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${lc.getLike()}" /></span> lượt thích
+
+                                                        </div>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <div class="col">
+                                                            <span style="color:red">♥ <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${lc.getLike()}" /></span> Bạn đã thích bình luận này
+                                                        </div>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:if>
+                                            <c:if test="${sessionScope.player == null}">
+                                                <div class="col">
+                                                    <span style="color:red">♥ <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${lc.getLike()}" /></span> lượt thích
                                                 </div>
                                             </c:if>
 
-
+                                            <c:if test="${sessionScope.player != null}">
+                                                <c:set var="count" value="${0}"></c:set>
+                                                <c:forEach items="${lc.getList_userID_liked()}" var="lul">
+                                                    <c:if test="${lul == sessionScope.player.getId()}">
+                                                        <c:set var="count" value="${count + 1}"></c:set>
+                                                    </c:if>
+                                                </c:forEach>
+                                                <c:if test="${count == 0}">
+                                                    <div class="col text-right">
+                                                        <a style="float:right;padding-right: 3px;" href="topics?action=like&&id=${lc.getId()}">
+                                                            <img src="app/view/images/button/heart.png" alt=""/>
+                                                        </a>
+                                                    </div>
+                                                </c:if>
+                                            </c:if>
 
                                         </div>
                                     </td>
@@ -328,6 +386,7 @@
                                                             <span id="notify" class="text-danger"></span>
                                                         </div>
                                                         <button class="btn btn-light btn-sm" type="submit">Bình luận</button>
+                                                        <a href="new-comment?id=${getposts.getId()}" class="btn btn-light btn-sm" type="submit">Gửi ảnh</a>
                                                     </form>
                                                 </div>
                                             </div>
@@ -340,6 +399,7 @@
                     </div>
                 </c:if>
             </c:if>
+
 
 
 

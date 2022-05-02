@@ -40,6 +40,7 @@ public class PostsDAO extends BaseDAO<posts> {
                 s.setStatus(rs.getInt("status"));
                 s.setUser_id(rs.getInt("user_id"));
                 s.setUserID_liked(rs.getString("userID_liked"));
+                s.setLinkImg(rs.getString("linkImg"));
                 listposts.add(s);
             }
         } catch (SQLException ex) {
@@ -68,6 +69,7 @@ public class PostsDAO extends BaseDAO<posts> {
                 s.setStatus(rs.getInt("status"));
                 s.setUser_id(rs.getInt("user_id"));
                 s.setUserID_liked(rs.getString("userID_liked"));
+                s.setLinkImg(rs.getString("linkImg"));
                 listpostsNotification.add(s);
             }
         } catch (SQLException ex) {
@@ -97,6 +99,7 @@ public class PostsDAO extends BaseDAO<posts> {
                 s.setStatus(rs.getInt("status"));
                 s.setUser_id(rs.getInt("user_id"));
                 s.setUserID_liked(rs.getString("userID_liked"));
+                s.setLinkImg(rs.getString("linkImg"));
                 listComment.add(s);
             }
         } catch (SQLException ex) {
@@ -125,6 +128,7 @@ public class PostsDAO extends BaseDAO<posts> {
                 s.setStatus(rs.getInt("status"));
                 s.setUser_id(rs.getInt("user_id"));
                 s.setUserID_liked(rs.getString("userID_liked"));
+                s.setLinkImg(rs.getString("linkImg"));
                 return s;
             }
         } catch (SQLException ex) {
@@ -141,6 +145,21 @@ public class PostsDAO extends BaseDAO<posts> {
             statement.setString(2, userID);
             statement.setString(3, content);
             statement.setString(4, timeCmt);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PostsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void createCommentWithImg(String topicID, String userID, String content, String timeCmt, String linkImg) {
+        try {
+            String sql = "INSERT INTO posts (uid_posts, user_id, content, time_cmt, linkImg) VALUES(?,?,?,?,?)";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, topicID);
+            statement.setString(2, userID);
+            statement.setString(3, content);
+            statement.setString(4, timeCmt);
+            statement.setString(5, linkImg);
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(PostsDAO.class.getName()).log(Level.SEVERE, null, ex);

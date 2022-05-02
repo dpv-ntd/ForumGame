@@ -28,11 +28,12 @@ public class posts {
     private int reply;
     private String userID_liked;
     private String[] list_userID_liked;
+    private String linkImg;
 
     public posts() {
     }
 
-    public posts(int id, int uid_posts, int user_id, String title, String content, String time, int like, int lock, int view, int status, String time_cmt, String thoigian, int reply, String userID_liked) {
+    public posts(int id, int uid_posts, int user_id, String title, String content, String time, int like, int lock, int view, int status, String time_cmt, String thoigian, int reply, String userID_liked, String[] list_userID_liked, String linkImg) {
         this.id = id;
         this.uid_posts = uid_posts;
         this.user_id = user_id;
@@ -47,6 +48,8 @@ public class posts {
         this.thoigian = thoigian;
         this.reply = reply;
         this.userID_liked = userID_liked;
+        this.list_userID_liked = list_userID_liked;
+        this.linkImg = linkImg;
     }
 
     public int getReply() {
@@ -175,11 +178,20 @@ public class posts {
     }
 
     public String[] getList_userID_liked() {
+        list_userID_liked = getUserID_liked().split(",");
         return list_userID_liked;
     }
 
     public void setList_userID_liked(String[] list_userID_liked) {
         this.list_userID_liked = list_userID_liked;
+    }
+
+    public String getLinkImg() {
+        return linkImg;
+    }
+
+    public void setLinkImg(String linkImg) {
+        this.linkImg = linkImg;
     }
 
     @Override

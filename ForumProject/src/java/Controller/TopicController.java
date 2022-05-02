@@ -62,6 +62,7 @@ public class TopicController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         String id = request.getParameter("id");
         if (id == null) {
             response.sendRedirect("home");
@@ -74,7 +75,6 @@ public class TopicController extends HttpServlet {
         posts getposts = daoPosts.getposts(id);
         ArrayList<player> listplayer = daoPlayer.getListplayer();
         ArrayList<posts> listComment = daoPosts.getComment(id);
-
         request.getSession().setAttribute("urlPrev", "topic?id=" + id);
         request.setAttribute("getposts", getposts);
         request.setAttribute("listplayer", listplayer);

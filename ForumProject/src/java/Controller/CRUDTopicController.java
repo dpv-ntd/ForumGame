@@ -5,6 +5,7 @@
 package Controller;
 
 import DAL.PostsDAO;
+import Model.player;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -112,7 +113,11 @@ public class CRUDTopicController extends HttpServlet {
             }
             if (action.equals("like")) {
                 String id = request.getParameter("id");
+                player player = (player) request.getSession().getAttribute("player");
+                String userID = String.valueOf(player.getId());
+                
                 dao.updateLike(id);
+                dao.updateUserIDLike(id, userID);
                 String urlPrev = (String) request.getSession().getAttribute("urlPrev");
                 response.sendRedirect(urlPrev);
                 return;

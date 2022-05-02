@@ -26,11 +26,13 @@ public class posts {
     private String time_cmt;
     private String thoigian;
     private int reply;
+    private String userID_liked;
+    private String[] list_userID_liked;
 
     public posts() {
     }
 
-    public posts(int id, int uid_posts, int user_id, String title, String content, String time, int like, int lock, int view, int status, String time_cmt, String thoigian) {
+    public posts(int id, int uid_posts, int user_id, String title, String content, String time, int like, int lock, int view, int status, String time_cmt, String thoigian, int reply, String userID_liked) {
         this.id = id;
         this.uid_posts = uid_posts;
         this.user_id = user_id;
@@ -43,6 +45,8 @@ public class posts {
         this.status = status;
         this.time_cmt = time_cmt;
         this.thoigian = thoigian;
+        this.reply = reply;
+        this.userID_liked = userID_liked;
     }
 
     public int getReply() {
@@ -162,9 +166,25 @@ public class posts {
         this.time_cmt = time_cmt;
     }
 
+    public String getUserID_liked() {
+        return userID_liked;
+    }
+
+    public void setUserID_liked(String userID_liked) {
+        this.userID_liked = userID_liked;
+    }
+
+    public String[] getList_userID_liked() {
+        return list_userID_liked;
+    }
+
+    public void setList_userID_liked(String[] list_userID_liked) {
+        this.list_userID_liked = list_userID_liked;
+    }
+
     @Override
     public String toString() {
-        return "posts{" + "id=" + id + ", uid_posts=" + uid_posts + ", user_id=" + user_id + ", title=" + title + ", content=" + content + ", time=" + time + ", like=" + like + ", lock=" + lock + ", view=" + view + ", status=" + status + ", time_cmt=" + time_cmt + ", thoigian=" + thoigian + '}';
+        return "posts{" + "id=" + id + ", uid_posts=" + uid_posts + ", user_id=" + user_id + ", title=" + title + ", content=" + content + ", time=" + time + ", like=" + like + ", lock=" + lock + ", view=" + view + ", status=" + status + ", time_cmt=" + time_cmt + ", thoigian=" + thoigian + ", reply=" + reply + ", userID_liked=" + userID_liked + ", list_userID_liked=" + list_userID_liked + '}';
     }
 
 }

@@ -39,6 +39,7 @@ public class PostsDAO extends BaseDAO<posts> {
                 s.setView(rs.getInt("view"));
                 s.setStatus(rs.getInt("status"));
                 s.setUser_id(rs.getInt("user_id"));
+                s.setUserID_liked(rs.getString("userID_liked"));
                 listposts.add(s);
             }
         } catch (SQLException ex) {
@@ -66,6 +67,7 @@ public class PostsDAO extends BaseDAO<posts> {
                 s.setView(rs.getInt("view"));
                 s.setStatus(rs.getInt("status"));
                 s.setUser_id(rs.getInt("user_id"));
+                s.setUserID_liked(rs.getString("userID_liked"));
                 listpostsNotification.add(s);
             }
         } catch (SQLException ex) {
@@ -94,6 +96,7 @@ public class PostsDAO extends BaseDAO<posts> {
                 s.setView(rs.getInt("view"));
                 s.setStatus(rs.getInt("status"));
                 s.setUser_id(rs.getInt("user_id"));
+                s.setUserID_liked(rs.getString("userID_liked"));
                 listComment.add(s);
             }
         } catch (SQLException ex) {
@@ -121,6 +124,7 @@ public class PostsDAO extends BaseDAO<posts> {
                 s.setView(rs.getInt("view"));
                 s.setStatus(rs.getInt("status"));
                 s.setUser_id(rs.getInt("user_id"));
+                s.setUserID_liked(rs.getString("userID_liked"));
                 return s;
             }
         } catch (SQLException ex) {
@@ -256,6 +260,18 @@ public class PostsDAO extends BaseDAO<posts> {
         }
     }
 
+    public void updateUserIDLike(String id, String userID) {
+        try {
+            String sql = "UPDATE posts SET userID_liked = userID_liked + ? WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, "," + userID);
+            statement.setString(2, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PostsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public void editAccount(String username, String password, String name, String role, String dob, String address, String phonenumber, String email, String AccountID) {
         try {
             String sql = "UPDATE Account SET Username = ?, Password = ?, Name = ?, Role = ?, DOB = ?, Address = ?, PhoneNumber = ?, Email = ? WHERE AccountID = ?";
@@ -294,7 +310,8 @@ public class PostsDAO extends BaseDAO<posts> {
 
     public static void main(String[] args) {
         PostsDAO dao = new PostsDAO();
-        System.out.println(dao.getReply(57));
+        dao.updateUserIDLike("65", "1");
+        System.out.println(dao.getposts("65"));
 
     }
 

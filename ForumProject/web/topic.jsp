@@ -151,12 +151,16 @@
                                         <div class="col">
                                             <span style="color:red">♥ ${getposts.getLike()}</span> lượt thích
                                         </div>
-                                        <div class="col text-right">
-                                            <a style="float:right;padding-right: 3px;" href="topics?action=like&&id=${getposts.getId()}">
-                                                <img src="app/view/images/button/heart.png" alt=""/>
-                                            </a>
 
-                                        </div>
+                                        <c:if test="${sessionScope.player != null}">
+                                            ${getposts.getList_userID_liked()}
+                                            <div class="col text-right">
+                                                <a style="float:right;padding-right: 3px;" href="topics?action=like&&id=${getposts.getId()}">
+                                                    <img src="app/view/images/button/heart.png" alt=""/>
+                                                </a>
+                                            </div>
+                                        </c:if>
+
                                     </div>
                                 </td>
                             </tr>
@@ -261,6 +265,22 @@
                                                 </div>
 
                                             </div>
+                                        </div>
+                                        <div class="row" style="font-size: 10px; padding: 5px 7px;">
+                                            <div class="col">
+                                                <span style="color:red">♥ ${lc.getLike()}</span> lượt thích
+                                            </div>
+
+                                            <c:if test="${sessionScope.player != null}">
+                                                <div class="col text-right">
+                                                    <a style="float:right;padding-right: 3px;" href="topics?action=like&&id=${lc.getId()}">
+                                                        <img src="app/view/images/button/heart.png" alt=""/>
+                                                    </a>
+                                                </div>
+                                            </c:if>
+
+
+
                                         </div>
                                     </td>
                                 </tr>

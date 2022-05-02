@@ -70,11 +70,12 @@ public class TopicController extends HttpServlet {
 
         PostsDAO daoPosts = new PostsDAO();
         PlayerDAO daoPlayer = new PlayerDAO();
-
+        daoPosts.updateView(id);
         posts getposts = daoPosts.getposts(id);
         ArrayList<player> listplayer = daoPlayer.getListplayer();
         ArrayList<posts> listComment = daoPosts.getComment(id);
 
+        request.getSession().setAttribute("urlPrev", "topic?id=" + id);
         request.setAttribute("getposts", getposts);
         request.setAttribute("listplayer", listplayer);
         request.setAttribute("listComment", listComment);
@@ -92,10 +93,10 @@ public class TopicController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         request.setCharacterEncoding("UTF-8");
         response.setCharacterEncoding("UTF-8");
-        
+
         PlayerDAO daoPlayer = new PlayerDAO();
         PostsDAO daoPosts = new PostsDAO();
 

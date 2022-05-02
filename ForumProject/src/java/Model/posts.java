@@ -4,6 +4,7 @@
  */
 package Model;
 
+import DAL.PostsDAO;
 import java.util.Date;
 
 /**
@@ -24,6 +25,7 @@ public class posts {
     private int status;
     private String time_cmt;
     private String thoigian;
+    private int reply;
 
     public posts() {
     }
@@ -41,6 +43,12 @@ public class posts {
         this.status = status;
         this.time_cmt = time_cmt;
         this.thoigian = thoigian;
+    }
+
+    public int getReply() {
+        PostsDAO daoPosts = new PostsDAO();
+        reply = daoPosts.getReply(getId());
+        return reply;
     }
 
     public String getThoigian() {

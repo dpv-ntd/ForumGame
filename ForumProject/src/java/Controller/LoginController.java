@@ -89,6 +89,7 @@ public class LoginController extends HttpServlet {
             return;
         }
         if (player != null) {
+            dao.updateOnline(player.getId());
             request.getSession().setAttribute("player", player);
             response.sendRedirect("home");
         } else {

@@ -13,22 +13,26 @@ public class player {
     private int id;
     private String username;
     private String password;
+    private String displayname;
     private int posts;
     private int avatar;
     private int admin;
     private int time;
+    private int online;
 
     public player() {
     }
 
-    public player(int id, String username, String password, int posts, int avatar, int admin, int time) {
+    public player(int id, String username, String password, String displayname, int posts, int avatar, int admin, int time, int online) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.displayname = displayname;
         this.posts = posts;
         this.avatar = avatar;
         this.admin = admin;
         this.time = time;
+        this.online = online;
     }
 
     public int getId() {
@@ -53,6 +57,14 @@ public class player {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getDisplayname() {
+        return displayname;
+    }
+
+    public void setDisplayname(String displayname) {
+        this.displayname = displayname;
     }
 
     public int getPosts() {
@@ -87,9 +99,17 @@ public class player {
         this.time = time;
     }
 
+    public int getOnline() {
+        return online;
+    }
+
+    public void setOnline(int online) {
+        this.online = online;
+    }
+
     @Override
     public String toString() {
-        return "player{" + "id=" + id + ", username=" + username + ", password=" + password + ", posts=" + posts + ", avatar=" + avatar + ", admin=" + admin + ", time=" + time + '}';
+        return "player{" + "id=" + id + ", username=" + username + ", password=" + password + ", displayname=" + displayname + ", posts=" + posts + ", avatar=" + avatar + ", admin=" + admin + ", time=" + time + ", online=" + online + '}';
     }
 
 }

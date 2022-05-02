@@ -4,6 +4,8 @@
  */
 package Controller;
 
+import DAL.PlayerDAO;
+import Model.player;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -57,6 +59,9 @@ public class LogoutController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        PlayerDAO dao = new PlayerDAO();
+        player player = (player) request.getSession().getAttribute("player");
+        dao.updateOffline(player.getId());
         request.getSession().removeAttribute("player");
         response.sendRedirect("home");
     }

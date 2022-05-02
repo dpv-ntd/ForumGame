@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="vi">
     <head>
@@ -39,7 +40,7 @@
         <div class="container pt-2 pb-2" style="background-color: #17a2b8">
             <div class="row">
                 <div class="col">
-                    <a class="btn btn-light btn-sm" onclick="history.back()" style="padding: 1px 4px"><i class="fas fa-angle-left"></i> Quay lại</a>
+                    <a class="btn btn-light btn-sm" href="home" style="padding: 1px 4px"><i class="fas fa-angle-left"></i> Quay lại</a>
                 </div>
             </div>
         </div>
@@ -56,10 +57,35 @@
                                         <c:forEach items="${listplayer}" var="lpl">
                                             <c:if test="${lpl.getId() == getposts.getUser_id()}">
                                                 <img src="app/view/images/avatar/${lpl.getAvatar()}.png" style="width: 30px; "></br>
-                                                <div style="font-size: 9px; padding-top: 5px">
-                                                    ${lpl.getUsername()}
-                                                </div>
-                                                <div style="font-size: 8px">Điểm: ${lpl.getPosts()}</div>
+                                                <c:if test="${lpl.getAdmin() == 1}">
+                                                    <div style="font-size: 7px; font-weight: bold; padding-top: 5px; color: #FF4444">
+                                                        ${lpl.getDisplayname()}
+                                                    </div>
+                                                    <div style="font-size: 7px; font-weight: bold; color: #FF4444">
+                                                        Admin
+                                                    </div>
+                                                </c:if>
+                                                <c:if test="${lpl.getAdmin() == 2}">
+                                                    <div style="font-size: 7px; font-weight: bold; padding-top: 5px; color: #008000">
+                                                        ${lpl.getDisplayname()}
+                                                    </div>
+                                                    <div style="font-size: 7px; font-weight: bold; color: #008000">
+                                                        SMod
+                                                    </div>
+                                                </c:if>
+                                                <c:if test="${lpl.getAdmin() == 3}">
+                                                    <div style="font-size: 7px; font-weight: bold; padding-top: 5px; color: #9932CC">
+                                                        ${lpl.getUsername()}
+                                                    </div>
+                                                    <div style="font-size: 7px; font-weight: bold; color: #9932CC">
+                                                        Mod
+                                                    </div>
+                                                </c:if>
+                                                <c:if test="${lpl.getAdmin() == 0}">
+                                                    <div style="font-size: 7px; font-weight: bold; padding-top: 5px; color: #013481">
+                                                        ${lpl.getUsername()}
+                                                    </div>
+                                                </c:if>
                                             </c:if>
                                         </c:forEach>
                                     </div>
@@ -67,21 +93,69 @@
                                 <td class="bg bg-light" style=" border-radius: 7px">
                                     <div class="row" style="font-size: 9px; padding: 5px 7px;">
                                         <div class="col">
-                                            <span id="timeTitle"></span>
+                                            <c:forEach items="${listplayer}" var="lpl">
+                                                <c:if test="${lpl.getId() == getposts.getUser_id()}">
+                                                    <img src="app/view/images/status/${lpl.getOnline() == 0 ? "offline":"online"}.png" alt=""/>
+                                                </c:if>
+                                            </c:forEach>
+                                            <i id="timeTitle"></i>
                                         </div>
                                         <div class="col text-right">
-                                            <span><a href=""><i>[EDIT]</i></a></span>
-                                            <span><a href=""><i>[KHÓA]</i></a></span>
-                                            <span><a href=""><i>[HOT]</i></a></span>
-                                            <span><a href=""><i>[NEW]</i></a></span>
-                                            <span>#0</span>
+                                            <c:if test="${sessionScope.player.getAdmin() == 1}">
+                                                <span><a href=""><i>[EDIT]</i></a></span>
+                                                <span><a href="topics?action=delete&&id=${getposts.getId()}"><i>[DEL]</i></a></span>
+                                                <c:if test="${getposts.getLock() == 0}">
+                                                    <span><a href="topics?action=lock&&id=${getposts.getId()}"><i>[KHÓA]</i></a></span>
+                                                </c:if>
+                                                <c:if test="${getposts.getLock() == 1}">
+                                                    <span><a href="topics?action=unlock&&id=${getposts.getId()}"><i>[MỞ KHÓA]</i></a></span>
+                                                </c:if>
+                                                <c:if test="${getposts.getStatus() == 2}">
+                                                    <span><a href="topics?action=hot&&id=${getposts.getId()}"><i>[HOT]</i></a></span>
+                                                </c:if>
+                                                <c:if test="${getposts.getStatus() == 3}">
+                                                    <span><a href="topics?action=new&&id=${getposts.getId()}"><i>[NEW]</i></a></span>
+                                                </c:if>
+                                                <c:if test="${getposts.getStatus() > 1}">
+                                                    <span><a href="topics?action=normal&&id=${getposts.getId()}"><i>[NORMAL]</i></a></span>
+                                                </c:if>
+                                                <c:if test="${getposts.getStatus() == 0}">
+                                                    <span><a href="topics?action=new&&id=${getposts.getId()}"><i>[NEW]</i></a></span>
+                                                    <span><a href="topics?action=hot&&id=${getposts.getId()}"><i>[HOT]</i></a></span>
+                                                </c:if>
+                                            </c:if>
+                                            <c:forEach items="${listplayer}" var="lpl">
+                                                <c:if test="${lpl.getId() == getposts.getUser_id()}">
+                                                    <i>Điểm: <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${lpl.getPosts()}" /></i>
+                                                </c:if>
+                                            </c:forEach>
                                         </div>
+
                                     </div>
 
                                     <div class="row" style="padding: 0 7px 15px 7px">
                                         <div class="col">
-                                            <span class="font-weight-bold">${getposts.getTitle()}</span></br>
+                                            <span class="font-weight-bold">
+                                                ${getposts.getTitle()}
+                                                <c:if test="${getposts.getStatus() == 2}">
+                                                    <img src="app/view/images/status/new.gif">
+                                                </c:if>
+                                                <c:if test="${getposts.getStatus() == 3}">
+                                                    <img src="app/view/images/status/hot.gif">
+                                                </c:if>
+                                            </span></br>
                                             <span>${getposts.getContent()}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="font-size: 10px; padding: 5px 7px;">
+                                        <div class="col">
+                                            <span style="color:red">♥ ${getposts.getLike()}</span> lượt thích
+                                        </div>
+                                        <div class="col text-right">
+                                            <a style="float:right;padding-right: 3px;" href="topics?action=like&&id=${getposts.getId()}">
+                                                <img src="app/view/images/button/heart.png" alt=""/>
+                                            </a>
+
                                         </div>
                                     </div>
                                 </td>
@@ -104,10 +178,35 @@
                                             <c:if test="${lpl.getId() == lc.getUser_id()}">
                                                 <div class="text-center" style="margin-left: -10px;">
                                                     <img src="app/view/images/avatar/${lpl.getAvatar()}.png" style="width: 30px; "></br>
-                                                    <div style="font-size: 9px; padding-top: 5px">
-                                                        ${lpl.getUsername()}
-                                                    </div>
-                                                    <div style="font-size: 8px">Điểm: ${lpl.getPosts()}</div>
+                                                    <c:if test="${lpl.getAdmin() == 1}">
+                                                        <div style="font-size: 7px; font-weight: bold; padding-top: 5px; color: #FF4444">
+                                                            ${lpl.getDisplayname()}
+                                                        </div>
+                                                        <div style="font-size: 7px; font-weight: bold; color: #FF4444">
+                                                            Admin
+                                                        </div>
+                                                    </c:if>
+                                                    <c:if test="${lpl.getAdmin() == 2}">
+                                                        <div style="font-size: 7px; font-weight: bold; padding-top: 5px; color: #008000">
+                                                            ${lpl.getDisplayname()}
+                                                        </div>
+                                                        <div style="font-size: 7px; font-weight: bold; color: #008000">
+                                                            SMod
+                                                        </div>
+                                                    </c:if>
+                                                    <c:if test="${lpl.getAdmin() == 3}">
+                                                        <div style="font-size: 7px; font-weight: bold; padding-top: 5px; color: #9932CC">
+                                                            ${lpl.getUsername()}
+                                                        </div>
+                                                        <div style="font-size: 7px; font-weight: bold; color: #9932CC">
+                                                            Mod
+                                                        </div>
+                                                    </c:if>
+                                                    <c:if test="${lpl.getAdmin() == 0}">
+                                                        <div style="font-size: 7px; font-weight: bold; padding-top: 5px; color: #013481">
+                                                            ${lpl.getUsername()}
+                                                        </div>
+                                                    </c:if>
                                                 </div>
                                             </c:if>
                                         </c:forEach>
@@ -116,10 +215,23 @@
                                     <td class="bg bg-light" style="border-radius: 7px;">
                                         <div class="row" style="font-size: 9px; padding: 5px 7px;">
                                             <div class="col">
-                                                <span>${lc.getThoigian()}</span>
+                                                <c:forEach items="${listplayer}" var="lpl">
+                                                    <c:if test="${lpl.getId() == lc.getUser_id()}">
+                                                        <img src="app/view/images/status/${lpl.getOnline() == 0 ? "offline":"online"}.png" alt=""/>
+                                                    </c:if>
+                                                </c:forEach>
+                                                <span><i>${lc.getThoigian()}</i></span>
                                             </div>
                                             <div class="col text-right">
-                                                <span>#${stt.getIndex()+1}</span>
+                                                <c:if test="${sessionScope.player.getAdmin() == 1}">
+                                                    <span><a href=""><i>[EDIT]</i></a></span>
+                                                    <span><a href="topics?action=del&&id=${lc.getId()}"><i>[DEL]</i></a></span>
+                                                </c:if>
+                                                <c:forEach items="${listplayer}" var="lpl">
+                                                    <c:if test="${lpl.getId() == lc.getUser_id()}">
+                                                        <i>Điểm: <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${lpl.getPosts()}" /></i>
+                                                    </c:if>
+                                                </c:forEach>
                                             </div>
                                         </div>
                                         <style type="text/css">
@@ -167,46 +279,48 @@
                     <a href="/topic/27052/2" class="btn btn-sm btn-light">></a>
                 </div>
             </div>
-
-            <c:if test="${sessionScope.player != null}">
-                <div class="row mt-3">
-                    <div class="col">
-                        <table cellpadding="0" cellspacing="0" width="99%" style="font-size: 13px;">
-                            <tbody>
-                                <tr>
-                                    <td width="55px;" style="vertical-align: top">
-                                        <div class="text-left" style="display: block;">
-                                            <c:forEach items="${listplayer}" var="lpl">
-                                                <c:if test="${lpl.getId() == sessionScope.player.getId()}">
-                                                    <img src="app/view/images/avatar/${lpl.getAvatar()}.png" style="width: 30px; "></br>
-                                                    <div style="font-size: 9px; padding-top: 5px"></div>
-                                                </c:if>
-                                            </c:forEach>
-                                        </div>
-                                    </td>
-                                    <td style=" border-radius: 7px">
-                                        <div class="row">
-                                            <div class="col">
-                                                <form id="form" action="topic" method="post">
-                                                    <input type="hidden" id="topicID" name="topicID" value="${getposts.getId()}">
-                                                    <input type="hidden" id="userID" name="userID" value="${sessionScope.player.getId()}">
-                                                    <input type="hidden" id="timeCmt" name="timeCmt" value="">
-                                                    <div class="form-group">
-                                                        <textarea class="form-control" name="content" id="content" aria-label="With textarea" placeholder="Từ 4 tới 256 kí tự" required=""></textarea>
-                                                        <span id="notify" class="text-danger"></span>
-                                                    </div>
-                                                    <button class="btn btn-light btn-sm" type="submit">Bình luận</button>
-                                                </form>
+            <c:if test="${getposts.getLock() == 0}">
+                <c:if test="${sessionScope.player != null}">
+                    <div class="row mt-3">
+                        <div class="col">
+                            <table cellpadding="0" cellspacing="0" width="99%" style="font-size: 13px;">
+                                <tbody>
+                                    <tr>
+                                        <td width="55px;" style="vertical-align: top">
+                                            <div class="text-left" style="display: block;">
+                                                <c:forEach items="${listplayer}" var="lpl">
+                                                    <c:if test="${lpl.getId() == sessionScope.player.getId()}">
+                                                        <img src="app/view/images/avatar/${lpl.getAvatar()}.png" style="width: 30px; "></br>
+                                                        <div style="font-size: 9px; padding-top: 5px"></div>
+                                                    </c:if>
+                                                </c:forEach>
                                             </div>
-                                        </div>
-                                    </td>
+                                        </td>
+                                        <td style=" border-radius: 7px">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <form id="form" action="topic" method="post">
+                                                        <input type="hidden" id="topicID" name="topicID" value="${getposts.getId()}">
+                                                        <input type="hidden" id="userID" name="userID" value="${sessionScope.player.getId()}">
+                                                        <input type="hidden" id="timeCmt" name="timeCmt" value="">
+                                                        <div class="form-group">
+                                                            <textarea class="form-control" name="content" id="content" aria-label="With textarea" placeholder="Từ 4 tới 256 kí tự" required=""></textarea>
+                                                            <span id="notify" class="text-danger"></span>
+                                                        </div>
+                                                        <button class="btn btn-light btn-sm" type="submit">Bình luận</button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </td>
 
-                                </tr>
-                            </tbody>
-                        </table>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                </div>
+                </c:if>
             </c:if>
+
 
 
         </div>

@@ -157,11 +157,99 @@ public class PostsDAO extends BaseDAO<posts> {
         }
     }
 
-    public void deleteAccount(String AccountId) {
+    public void deletePosts(String id) {
         try {
-            String sql = "DELETE Account WHERE AccountId= ?";
+            String sql = "DELETE posts WHERE id= ?";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, AccountId);
+            statement.setString(1, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PostsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void deleteComment(String uid_posts) {
+        try {
+            String sql = "DELETE posts WHERE uid_posts= ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, uid_posts);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PostsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateHot(String id) {
+        try {
+            String sql = "UPDATE posts SET status = 3 WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PostsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateNew(String id) {
+        try {
+            String sql = "UPDATE posts SET status = 2 WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PostsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateNormal(String id) {
+        try {
+            String sql = "UPDATE posts SET status = 0 WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PostsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateLock(String id) {
+        try {
+            String sql = "UPDATE posts SET lock = 1 WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PostsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateUnlock(String id) {
+        try {
+            String sql = "UPDATE posts SET lock = 0 WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PostsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateView(String id) {
+        try {
+            String sql = "UPDATE posts SET [view] = [view] + 1 WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PostsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateLike(String id) {
+        try {
+            String sql = "UPDATE posts SET [like] = [like] + 1 WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id);
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(PostsDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -187,9 +275,26 @@ public class PostsDAO extends BaseDAO<posts> {
         }
     }
 
+    public int getReply(int id) {
+        try {
+            int reply = 0;
+            String sql = "SELECT COUNT(id) AS reply FROM posts WHERE uid_posts = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                reply = rs.getInt("reply");
+            }
+            return reply;
+        } catch (SQLException ex) {
+            Logger.getLogger(PostsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
     public static void main(String[] args) {
         PostsDAO dao = new PostsDAO();
-        dao.createPosts("1", "title", "content", "time");
+        System.out.println(dao.getReply(57));
 
     }
 

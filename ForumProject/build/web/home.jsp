@@ -65,23 +65,40 @@
                                     </c:if>
                                 </c:forEach>
                             </div>
-                            <div class="box-right">
-                                <a href="topic?id=${lpn.getId()}" class="important"> 
-                                    ${lpn.getTitle()} 
-                                    <c:if test="${lpn.getStatus() == 2}">
-                                        <img src="app/view/images/status/new.gif">
-                                    </c:if>
-                                    <c:if test="${lpn.getStatus() == 3}">
-                                        <img src="app/view/images/status/hot.gif">
-                                    </c:if>
-                                </a>
-                                <div class="box-name" style="font-size: 9px;">
-                                    <c:forEach items="${listplayer}" var="lpl">
-                                        <c:if test="${lpl.getId() == lpn.getUser_id()}">
-                                            từ ${lpl.getUsername()}
+                            <div class="box-right pb-2">
+                                <c:forEach items="${listplayer}" var="lpl">
+                                    <c:if test="${lpl.getId() == lpn.getUser_id()}">
+                                        <c:if test="${lpl.getAdmin() == 1 || lpl.getAdmin() == 2}">
+                                            <a href="topic?id=${lpn.getId()}" class="important"> 
+                                                <c:if test="${lpn.getLock() == 1}">
+                                                    <span class="fas fa-lock" style="font-size: 11px"></span>
+                                                </c:if>
+                                                ${lpn.getTitle()} 
+                                                <c:if test="${lpn.getStatus() == 2}">
+                                                    <img src="app/view/images/status/new.gif">
+                                                </c:if>
+                                                <c:if test="${lpn.getStatus() == 3}">
+                                                    <img src="app/view/images/status/hot.gif">
+                                                </c:if>
+                                            </a>
                                         </c:if>
-                                    </c:forEach>
-                                </div>
+                                        <c:if test="${lpl.getAdmin() == 3 || lpl.getAdmin() == 0}">
+                                            <a href="topic?id=${lpn.getId()}"> 
+                                                <c:if test="${lpn.getLock() == 1}">
+                                                    <span class="fas fa-lock" style="font-size: 11px"></span>
+                                                </c:if>
+                                                ${lpn.getTitle()} 
+                                                <c:if test="${lpn.getStatus() == 2}">
+                                                    <img src="app/view/images/status/new.gif">
+                                                </c:if>
+                                                <c:if test="${lpn.getStatus() == 3}">
+                                                    <img src="app/view/images/status/hot.gif">
+                                                </c:if>
+                                            </a>
+                                        </c:if>
+
+                                    </c:if>
+                                </c:forEach>
                             </div>
                         </div>
                     </c:forEach>
@@ -106,12 +123,23 @@
 
                             <div class="box-right">
                                 <a href="topic?id=${lpo.getId()}">
+                                    <c:if test="${lpo.getLock() == 1}">
+                                        <span class="fas fa-lock" style="font-size: 11px"></span>
+                                    </c:if>
                                     ${lpo.getTitle()}
                                 </a>
-                                <div class="box-name" style="font-size: 9px;">
+                                <div class="box-name" style="font-size: 10px;">
                                     <c:forEach items="${listplayer}" var="lpl">
                                         <c:if test="${lpl.getId() == lpo.getUser_id()}">
-                                            bởi ${lpl.getUsername()}
+                                            <c:if test="${lpl.getAdmin() == 1 || lpl.getAdmin() == 2}">
+                                                từ <b style="color: #1E5B7E">${lpl.getDisplayname()}</b> <i style="color: #666666">Trả lời: ${lpo.getReply()} - Xem: ${lpo.getView()}<span style="color:red"> [♥ ${lpo.getLike()}]</span></i>
+                                            </c:if>
+                                            <c:if test="${lpl.getAdmin() == 3}">
+                                                từ <b style="color: #1E5B7E">${lpl.getUsername()}</b> <i style="color: #666666">Trả lời: ${lpo.getReply()} - Xem: ${lpo.getView()}<span style="color:red"> [♥ ${lpo.getLike()}]</span></i>
+                                            </c:if>
+                                            <c:if test="${lpl.getAdmin() == 0}">
+                                                bởi <b style="color: #1E5B7E">${lpl.getUsername()}</b> <i style="color: #666666">Trả lời: ${lpo.getReply()} - Xem: ${lpo.getView()}<span style="color:red"> [♥ ${lpo.getLike()}]</span></i>
+                                            </c:if>
                                         </c:if>
                                     </c:forEach>
                                 </div>

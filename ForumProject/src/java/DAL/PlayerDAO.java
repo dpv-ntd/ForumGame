@@ -36,6 +36,8 @@ public class PlayerDAO extends BaseDAO<player> {
                 s.setAdmin(rs.getInt("admin"));
                 s.setPosts(rs.getInt("posts"));
                 s.setTime(rs.getInt("time"));
+                s.setOnline(rs.getInt("online"));
+                s.setDisplayname(rs.getString("displayname"));
                 return s;
             }
         } catch (SQLException ex) {
@@ -59,6 +61,8 @@ public class PlayerDAO extends BaseDAO<player> {
                 s.setAdmin(rs.getInt("admin"));
                 s.setPosts(rs.getInt("posts"));
                 s.setTime(rs.getInt("time"));
+                s.setOnline(rs.getInt("online"));
+                s.setDisplayname(rs.getString("displayname"));
                 return s;
             }
         } catch (SQLException ex) {
@@ -82,6 +86,8 @@ public class PlayerDAO extends BaseDAO<player> {
                 s.setAdmin(rs.getInt("admin"));
                 s.setPosts(rs.getInt("posts"));
                 s.setTime(rs.getInt("time"));
+                s.setOnline(rs.getInt("online"));
+                s.setDisplayname(rs.getString("displayname"));
                 listplayer.add(s);
             }
         } catch (SQLException ex) {
@@ -108,6 +114,28 @@ public class PlayerDAO extends BaseDAO<player> {
             String sql = "UPDATE player SET posts = posts + 1 WHERE id = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, userID);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PlayerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateOnline(int userID) {
+        try {
+            String sql = "UPDATE player SET online = 1 WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, userID);
+            statement.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PlayerDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateOffline(int userID) {
+        try {
+            String sql = "UPDATE player SET online = 0 WHERE id = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, userID);
             statement.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(PlayerDAO.class.getName()).log(Level.SEVERE, null, ex);

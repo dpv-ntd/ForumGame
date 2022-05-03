@@ -14,46 +14,87 @@
 
     <body class="">
 
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="text-center">
-                        <img height="12" src="app/view/images/12.png" style="vertical-align: middle;"> <small style="font-size: 10px" id="hour3">Dành cho người chơi trên 12 tuổi. Chơi quá 180 phút mỗi ngày sẽ hại sức khỏe.</small>
-                    </div>
-                </div>
-            </div>
-            <div class="row bg bg-info pb-3 pt-2 rounded-top">
-                <div class="col">
-                    <div class="text-center mb-2">
-                        <a href="home"><img class="rounded" src="app/view/images/logo/nroblue.png" id="logo"></a>
-                    </div>
-                    <div class="text-center pt-2">
-                        <a href="http://download.nroblue.com/adr/" class="btn btn-success btn-sm font-weight-bold border"><i class="fas fa-download"></i> Android</a>
-                        <a href="http://download.nroblue.com/pc/" class="btn btn-success btn-sm font-weight-bold border"><i class="fas fa-download"></i> Pc</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <%@include file="headNav.jsp" %>
 
 
         <%@include file="navbar-first.jsp" %>
+        <style>
+            #columns {
+            }
 
-        <div class="container color-main2 pb-2" id="pageHeader">
-            <div class="row text-center">
-                <div class="col">
-                    <a href="" class="btn btn-sm bg-light">Diễn đàn</a>
-                </div>
-                <div class="col">
-                    <a href="/box/1" class="btn btn-sm">Góp ý</a>
-                </div>
-                <div class="col">
-                    <a href="/box/2" class="btn btn-sm">Báo lỗi</a>
-                </div>
-            </div>
+            div#columns figure {
+                margin: 0 2px 0;
+                transition: opacity .4s ease-in-out;
+                display: inline-block
+            }
+
+            div#columns figure img {
+            }
+
+            div#columns figure figcaption {
+                font-size: 9px;
+                color: #444
+            }
+
+            div#columns small {
+                font-size: 1rem;
+                float: right;
+                text-transform: uppercase;
+                color: #aaa
+            }
+
+            div#columns small a {
+                color: #666;
+                text-decoration: none;
+                transition: .4s color
+            }
+        </style>
+        <div class="container text-center pb-2" style="background-color: #FFAF4D" id="columns">
+            <figure>
+                <a href=""><img height="35" src="app/view/images/button/jar.png" alt=""/></a>
+                <figcaption>
+                    <span style="color:rgb(209, 9, 50);">210</span> - <b> 6 ngày</b>
+                </figcaption>
+            </figure>
+            <figure>
+                <a href=""><img height="35" src="app/view/images/button/android.png" alt=""/></a>
+                <figcaption>
+                    <span style="color:rgb(209, 9, 50);">210</span> - <b> 6 ngày</b>
+                </figcaption>
+            </figure>
+            <figure>
+                <a href=""><img height="35" src="app/view/images/button/play.png" alt=""/></a>
+                <figcaption>
+                    <span style="color:rgb(209, 9, 50);">210</span> - <b> 6 ngày</b>
+                </figcaption>
+            </figure>
+            <figure>
+                <a href=""><img height="35" src="app/view/images/button/pc.png" alt=""/></a>
+                <figcaption>
+                    <span style="color:rgb(209, 9, 50);">210</span> - <b> 6 ngày</b>
+                </figcaption>
+            </figure>
+            <figure>
+                <a href=""><img height="35" src="app/view/images/button/ip.png" alt=""/></a>
+                <figcaption>
+                    <span style="color:rgb(209, 9, 50);">210</span> - <b> 6 ngày</b>
+                </figcaption>
+            </figure>
+            <figure>
+                <a href=""><img height="35" src="app/view/images/button/wp.png" alt=""/></a>
+                <figcaption>
+                    <span style="color:rgb(209, 9, 50);">210</span> - <b> 6 ngày</b>
+                </figcaption>
+            </figure>
+            <figure>
+                <a href=""><img height="35" src="app/view/images/button/napngoc.png" alt=""/></a>
+                <figcaption>
+                    <span style="color:rgb(209, 9, 50);">Báo Lỗi thẻ</span>
+                </figcaption>
+            </figure>
         </div>
 
-
-        <div class="container pt-2" style="background-color: #17a2b8">
+        <div class="container pt-2" style="background-color: #E49637">
             <div class="row">
                 <div class="col">
 
@@ -70,7 +111,7 @@
                                 <c:forEach items="${listplayer}" var="lpl">
                                     <c:if test="${lpl.getId() == lpn.getUser_id()}">
                                         <c:if test="${lpl.getAdmin() == 1 || lpl.getAdmin() == 2}">
-                                            <a href="topic?id=${lpn.getId()}" class="important"> 
+                                            <a href="topic?id=${lpn.getId()}" class="important" style="color: #AD4105"> 
                                                 <c:if test="${lpn.getLock() == 1}">
                                                     <span class="fas fa-lock" style="font-size: 11px"></span>
                                                 </c:if>
@@ -87,7 +128,7 @@
                                             </div>
                                         </c:if>
                                         <c:if test="${lpl.getAdmin() == 3 || lpl.getAdmin() == 0}">
-                                            <a href="topic?id=${lpn.getId()}"> 
+                                            <a href="topic?id=${lpn.getId()}" style="color: #AD4105"> 
                                                 <c:if test="${lpn.getLock() == 1}">
                                                     <span class="fas fa-lock" style="font-size: 11px"></span>
                                                 </c:if>
@@ -119,7 +160,7 @@
             </div>
         </div>
 
-        <div class="container pt-2 pb-2 color-main2">
+        <div class="container pt-2 pb-2 color-main2" style="background-color: #FFAF4D">
             <div class="row">
                 <div class="col">
 
@@ -134,7 +175,7 @@
                             </div>
 
                             <div class="box-right">
-                                <a href="topic?id=${lpo.getId()}">
+                                <a href="topic?id=${lpo.getId()}" style="color: #AD4105">
                                     <c:if test="${lpo.getLock() == 1}">
                                         <span class="fas fa-lock" style="font-size: 11px"></span>
                                     </c:if>
@@ -166,13 +207,13 @@
 
             <div class="row mt-3">
                 <div class="col">
-                    <a class="btn btn-light btn-sm" href="new-posts">Đăng bài mới</a>
+                    <a style="background-color: #F44336; color: white" class="btn btn-sm btn-danger" href="new-posts">Đăng bài mới</a>
                 </div>
                 <div class="col text-right">
-                    <a href="/box/0/1" class="btn btn-sm btn-light page-active"> 1 </a>
-                    <a href="/box/0/2" class="btn btn-sm btn-light">2</a>
-                    <a href="/box/0/3" class="btn btn-sm btn-light">3</a>
-                    <a href="/box/0/2" class="btn btn-sm btn-light">></a>
+                    <a href="/box/0/1" class="btn btn-sm" style="background-color: #561D00; color: white"> 1 </a>
+                    <a href="/box/0/2" class="btn btn-sm" style="background-color: white; color: #561D00">2</a>
+                    <a href="/box/0/3" class="btn btn-sm" style="background-color: white; color: #561D00">3</a>
+                    <a href="/box/0/2" class="btn btn-sm" style="background-color: white; color: #561D00">></a>
                 </div>
             </div>
 

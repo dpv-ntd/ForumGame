@@ -13,31 +13,12 @@
 
     <body class="">
 
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="text-center">
-                        <img height="12" src="app/view/images/12.png" style="vertical-align: middle;"> <small style="font-size: 10px" id="hour3">Dành cho người chơi trên 12 tuổi. Chơi quá 180 phút mỗi ngày sẽ hại sức khỏe.</small>
-                    </div>
-                </div>
-            </div>
-            <div class="row bg bg-info pb-3 pt-2 rounded-top">
-                <div class="col">
-                    <div class="text-center mb-2">
-                        <a href="home"><img class="rounded" src="app/view/images/logo/nroblue.png" id="logo"></a>
-                    </div>
-                    <div class="text-center pt-2">
-                        <a href="http://download.nroblue.com/adr/" class="btn btn-success btn-sm font-weight-bold border"><i class="fas fa-download"></i> Android</a>
-                        <a href="http://download.nroblue.com/pc/" class="btn btn-success btn-sm font-weight-bold border"><i class="fas fa-download"></i> Pc</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <%@include  file="headNav.jsp" %>
 
 
         <%@include file="navbar-first.jsp" %>
 
-        <div class="container color-main2 pb-3">
+        <div class="container color-main2 pb-3" style="background-color: #FFAF4D">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3 pr-5 pl-5">
                     <h4 class="text-center">ĐĂNG NHẬP</h4>
@@ -59,7 +40,7 @@
                             ${notify}
                         </div>
                         <div class="form-group">
-                            <button class="btn color-main font-weight-bold form-control" type="submit" id="btn" ><i class="fas fa-sign-in-alt"></i> ĐĂNG NHẬP</button>
+                            <button style="background-color: #F44336"  class="btn btn-sm btn-danger font-weight-bold form-control" type="submit" id="btn" ><i class="fas fa-sign-in-alt"></i> ĐĂNG NHẬP</button>
                         </div>
                     </form>
                     <div class="text-center">

@@ -13,31 +13,12 @@
     </head>
 
     <body class="">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="text-center">
-                        <img height="12" src="app/view/images/12.png" style="vertical-align: middle;"> <small style="font-size: 10px" id="hour3">Dành cho người chơi trên 12 tuổi. Chơi quá 180 phút mỗi ngày sẽ hại sức khỏe.</small>
-                    </div>
-                </div>
-            </div>
-            <div class="row bg bg-info pb-3 pt-2 rounded-top">
-                <div class="col">
-                    <div class="text-center mb-2">
-                        <a href="home"><img class="rounded" src="app/view/images/logo/nroblue.png" id="logo"></a>
-                    </div>
-                    <div class="text-center pt-2">
-                        <a href="http://download.nroblue.com/adr/" class="btn btn-success btn-sm font-weight-bold border"><i class="fas fa-download"></i> Android</a>
-                        <a href="http://download.nroblue.com/pc/" class="btn btn-success btn-sm font-weight-bold border"><i class="fas fa-download"></i> Pc</a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <%@include file="headNav.jsp" %>
 
 
         <%@include file="navbar-first.jsp" %>
 
-        <div class="container pt-2 pb-2" style="background-color: #17a2b8">
+        <div class="container pt-2 pb-2" style="background-color: #E49637">
             <div class="row">
                 <div class="col">
                     <a class="btn btn-light btn-sm" href="home" style="padding: 1px 4px"><i class="fas fa-angle-left"></i> Quay lại</a>
@@ -45,7 +26,7 @@
             </div>
         </div>
 
-        <div class="container pt-2 pb-2 color-main2">
+        <div class="container pt-2 pb-2 color-main2" style="background-color: #FFAF4D">
             <div class="row mb-4">
                 <div class="col">
 
@@ -348,15 +329,20 @@
 
                 </div>
             </div>
+        </div>
 
+        <div class="container pt-2 pb-2" style="background-color: #E49637">
             <div class="row">
                 <div class="col text-right">
-                    <a href="/topic/27052/1" class="btn btn-sm btn-light page-active"> 1 </a>
-                    <a href="/topic/27052/2" class="btn btn-sm btn-light">2</a>
-                    <a href="/topic/27052/3" class="btn btn-sm btn-light">3</a>
-                    <a href="/topic/27052/2" class="btn btn-sm btn-light">></a>
+                    <a href="/box/0/1" class="btn btn-sm" style="background-color: #561D00; color: white"> 1 </a>
+                    <a href="/box/0/2" class="btn btn-sm" style="background-color: white; color: #561D00">2</a>
+                    <a href="/box/0/3" class="btn btn-sm" style="background-color: white; color: #561D00">3</a>
+                    <a href="/box/0/2" class="btn btn-sm" style="background-color: white; color: #561D00">></a>
                 </div>
             </div>
+        </div>
+                                        
+        <div class="container pt-2 pb-2 color-main2" style="background-color: #FFAF4D">
             <c:if test="${getposts.getLock() == 0}">
                 <c:if test="${sessionScope.player != null}">
                     <div class="row mt-3">
@@ -382,7 +368,7 @@
                                                         <input type="hidden" id="userID" name="userID" value="${sessionScope.player.getId()}">
                                                         <input type="hidden" id="timeCmt" name="timeCmt" value="">
                                                         <div class="form-group">
-                                                            <textarea class="form-control" name="content" id="content" aria-label="With textarea" placeholder="Từ 4 tới 256 kí tự" required=""></textarea>
+                                                            <textarea rows="3" class="form-control" name="content" id="content" aria-label="With textarea" placeholder="Từ 4 tới 256 kí tự" required=""></textarea>
                                                             <span id="notify" class="text-danger"></span>
                                                         </div>
                                                         <button class="btn btn-light btn-sm" type="submit">Bình luận</button>

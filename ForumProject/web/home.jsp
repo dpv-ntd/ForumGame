@@ -66,7 +66,7 @@
                                     </c:if>
                                 </c:forEach>
                             </div>
-                            <div class="box-right pb-2">
+                            <div class="box-right">
                                 <c:forEach items="${listplayer}" var="lpl">
                                     <c:if test="${lpl.getId() == lpn.getUser_id()}">
                                         <c:if test="${lpl.getAdmin() == 1 || lpl.getAdmin() == 2}">
@@ -82,6 +82,9 @@
                                                     <img src="app/view/images/status/hot.gif">
                                                 </c:if>
                                             </a>
+                                            <div class="box-name" style="font-size: 10px;">
+                                                từ <b style="color: #1E5B7E">${lpl.getDisplayname()}</b> <i style="color: #666666">Trả lời: ${lpn.getReply()} - Xem: ${lpn.getView()}<span style="color:red"> [♥ <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${lpn.getLike()}" />]</span></i>
+                                            </div>
                                         </c:if>
                                         <c:if test="${lpl.getAdmin() == 3 || lpl.getAdmin() == 0}">
                                             <a href="topic?id=${lpn.getId()}"> 
@@ -96,6 +99,14 @@
                                                     <img src="app/view/images/status/hot.gif">
                                                 </c:if>
                                             </a>
+                                            <div class="box-name" style="font-size: 10px;">
+                                                <c:if test="${lpl.getAdmin() == 3}">
+                                                    từ <b style="color: #1E5B7E">${lpl.getUsername()}</b> <i style="color: #666666">Trả lời: ${lpn.getReply()} - Xem: ${lpn.getView()}<span style="color:red"> [♥ <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${lpn.getLike()}" />]</span></i>
+                                                </c:if>
+                                                <c:if test="${lpl.getAdmin() == 0}">
+                                                    bởi <b style="color: #1E5B7E">${lpl.getUsername()}</b> <i style="color: #666666">Trả lời: ${lpn.getReply()} - Xem: ${lpn.getView()}<span style="color:red"> [♥ <fmt:formatNumber type = "number" maxFractionDigits = "3" value = "${lpn.getLike()}" />]</span></i>
+                                                </c:if>
+                                            </div>
                                         </c:if>
 
                                     </c:if>

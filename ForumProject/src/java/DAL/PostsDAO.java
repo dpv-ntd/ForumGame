@@ -49,6 +49,38 @@ public class PostsDAO extends BaseDAO<posts> {
         return listposts;
     }
 
+    public ArrayList<posts> getListpostsWithPage(int page, int page_size) {
+        ArrayList<posts> listposts = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM posts WHERE uid_posts IS NULL AND status = 0 ORDER BY id OFFSET (?-1)*? ROW FETCH NEXT ? ROWS ONLY ";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, page);
+            statement.setInt(2, page_size);
+            statement.setInt(3, page_size);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                posts s = new posts();
+                s.setId(rs.getInt("id"));
+                s.setUid_posts(rs.getInt("uid_posts"));
+                s.setTitle(rs.getString("title"));
+                s.setContent(rs.getString("content"));
+                s.setLike(rs.getInt("like"));
+                s.setLock(rs.getInt("lock"));
+                s.setTime(rs.getString("time"));
+                s.setTime_cmt(rs.getString("time_cmt"));
+                s.setView(rs.getInt("view"));
+                s.setStatus(rs.getInt("status"));
+                s.setUser_id(rs.getInt("user_id"));
+                s.setUserID_liked(rs.getString("userID_liked"));
+                s.setLinkImg(rs.getString("linkImg"));
+                listposts.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listposts;
+    }
+
     public ArrayList<posts> getListpostsNotification() {
         ArrayList<posts> listpostsNotification = new ArrayList<>();
         try {
@@ -84,6 +116,39 @@ public class PostsDAO extends BaseDAO<posts> {
             String sql = "SELECT * FROM posts where uid_posts = ? ORDER BY id";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                posts s = new posts();
+                s.setId(rs.getInt("id"));
+                s.setUid_posts(rs.getInt("uid_posts"));
+                s.setTitle(rs.getString("title"));
+                s.setContent(rs.getString("content"));
+                s.setLike(rs.getInt("like"));
+                s.setLock(rs.getInt("lock"));
+                s.setTime(rs.getString("time"));
+                s.setTime_cmt(rs.getString("time_cmt"));
+                s.setView(rs.getInt("view"));
+                s.setStatus(rs.getInt("status"));
+                s.setUser_id(rs.getInt("user_id"));
+                s.setUserID_liked(rs.getString("userID_liked"));
+                s.setLinkImg(rs.getString("linkImg"));
+                listComment.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listComment;
+    }
+
+    public ArrayList<posts> getCommentWithPage(String id, int page, int page_size) {
+        ArrayList<posts> listComment = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM posts WHERE uid_posts = ? ORDER BY id OFFSET (?-1)*? ROW FETCH NEXT ? ROWS ONLY ";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id);
+            statement.setInt(2, page);
+            statement.setInt(3, page_size);
+            statement.setInt(4, page_size);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 posts s = new posts();

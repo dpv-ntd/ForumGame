@@ -3,13 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/E:/NetBeansProjects/ForumGame/ForumProject/src/java/Controller/NewCommentController.java</file>
             <file>file:/E:/NetBeansProjects/ForumGame/ForumProject/src/java/Controller/TopicController.java</file>
-            <file>file:/E:/NetBeansProjects/ForumGame/ForumProject/src/java/Controller/CRUDTopicController.java</file>
-            <file>file:/E:/NetBeansProjects/ForumGame/ForumProject/src/java/DAL/PlayerDAO.java</file>
-            <file>file:/E:/NetBeansProjects/ForumGame/ForumProject/web/home.jsp</file>
             <file>file:/E:/NetBeansProjects/ForumGame/ForumProject/src/java/Model/posts.java</file>
+            <file>file:/E:/NetBeansProjects/ForumGame/ForumProject/web/home.jsp</file>
             <file>file:/E:/NetBeansProjects/ForumGame/ForumProject/src/java/DAL/PostsDAO.java</file>
-            <file>file:/E:/NetBeansProjects/ForumGame/ForumProject/src/java/Model/player.java</file>
+            <file>file:/E:/NetBeansProjects/ForumGame/ForumProject/web/new-comment.jsp</file>
             <file>file:/E:/NetBeansProjects/ForumGame/ForumProject/web/topic.jsp</file>
         </group>
     </open-files>

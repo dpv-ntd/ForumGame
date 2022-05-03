@@ -11,7 +11,7 @@
         <%@include file="head.jsp" %>
     </head>
 
-    <body class="">
+    <body style="background-color: #B3AFAF">
 
         <%@include  file="headNav.jsp" %>
 

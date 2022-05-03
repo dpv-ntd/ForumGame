@@ -2,7 +2,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width,maximum-scale=1,user-scalable=no" />
 <meta http-equiv="content-language" content="vi" />
-<title>Dragon Ball</title>
+<title>Dragon Ball Z | Forum</title>
 <meta name="keywords" content="Chú Bé R?ng Online - Ng?c R?ng Online - Ng?c R?ng Online, Chú Bé R?ng Online, Ngoc Rong Online, Ng?c R?ng Mobile, Ngoc Rong Dien Thoai, Dragon Ball Online, game ngoc rong, ngoc rong, ngoc rong online, ngoc rong mobile, game 7 vien ngoc rong, game ng?c r?ng, ng?c r?ng, game 7 viên ng?c r?ng" />
 <meta name="description" content="Ngoc Rong Online, Ng?c R?ng Mobile, Ngoc Rong Dien Thoai, Dragon Ball Online" />
 <meta name="robots" content="INDEX,FOLLOW" />

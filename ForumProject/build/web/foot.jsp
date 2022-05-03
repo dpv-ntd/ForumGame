@@ -3,15 +3,10 @@
     <div class="row">
         <div class="col">
             <div class="text-center">
-                <div class="mb-3">
-                    <a href=""><span style="color: white"><i class="fab fa-facebook" style="color: blue !important"></i> Facebook</a></span></br>
-                    <a href=""><span style="color: white"><i class="fab fa-github text-black-50"></i> Github</span></a>
-                </div>
-                <div style="font-size: 11px">
+                <div style="font-size: 11px; color: black">
                     Diễn đàn
                     </br> <small>2022 ©FORUMDPV.COM</small>
                 </div>
-
             </div>
         </div>
     </div>

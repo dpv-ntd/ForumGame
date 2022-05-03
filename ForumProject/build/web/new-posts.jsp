@@ -33,12 +33,12 @@
                         <input name="userID" id="userID" value="${sessionScope.player.getId()}" type="hidden">
                         <input name="time" id="time" value="" type="hidden">
                         <div class="form-group">
-                            <label>Tiêu đề:</label>
+                            <label><b>Tiêu đề:</b></label>
                             <input class="form-control" type="text" name="title" id="title" placeholder="Từ 4 tới 64 kí tự" required="">
                         </div>
                         <div class="form-group">
-                            <label>Nội dung:</label>
-                            <textarea class="form-control" name="content" id="content" aria-label="With textarea" placeholder="Từ 4 tới 256 kí tự" required=""></textarea>
+                            <label><b>Nội dung:</b></label>
+                            <textarea rows="3" class="form-control" name="content" id="content" aria-label="With textarea" placeholder="Từ 4 tới 256 kí tự" required=""></textarea>
                         </div>
                         <div id="notify" class="text-danger form-group">
                         </div>

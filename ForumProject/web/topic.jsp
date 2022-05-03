@@ -116,7 +116,7 @@
 
                                     <div class="row" style="padding: 0 7px 15px 7px">
                                         <div class="col">
-                                            <span class="font-weight-bold">
+                                            <span class="font-weight-bold" style="color: #1E5B7E">
                                                 ${getposts.getTitle()}
                                                 <c:if test="${getposts.getStatus() == 2}">
                                                     <img src="app/view/images/status/new.gif">
@@ -341,7 +341,7 @@
                 </div>
             </div>
         </div>
-                                        
+
         <div class="container pt-2 pb-2 color-main2" style="background-color: #FFAF4D">
             <c:if test="${getposts.getLock() == 0}">
                 <c:if test="${sessionScope.player != null}">

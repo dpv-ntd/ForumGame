@@ -36,11 +36,11 @@
                         <input name="time" id="time" value="" type="hidden">
 
                         <div class="form-group">
-                            <label>Nội dung:</label>
-                            <textarea class="form-control" name="content" id="content" aria-label="With textarea" placeholder="Từ 4 tới 256 kí tự" required=""></textarea>
+                            <label><b>Nội dung:</b></label>
+                            <textarea rows="3" class="form-control" name="content" id="content" aria-label="With textarea" placeholder="Từ 4 tới 256 kí tự" required=""></textarea>
                         </div>
                         <div class="form-group">
-                            <label>Link ảnh:</label>
+                            <label><b>Link ảnh:</b></label>
                             <input class="form-control" type="text" name="linkImg" id="title" placeholder="Nhập link ảnh tại đây" required="">
                         </div>
                         <div id="notify" class="text-danger form-group">

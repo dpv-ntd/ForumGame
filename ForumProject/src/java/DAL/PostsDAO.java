@@ -23,7 +23,7 @@ public class PostsDAO extends BaseDAO<posts> {
     public ArrayList<posts> getListposts() {
         ArrayList<posts> listposts = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM posts where uid_posts IS NULL and status = 0 ORDER BY id";
+            String sql = "SELECT * FROM posts where uid_posts IS NULL and status = 0 ORDER BY id DESC";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -52,7 +52,7 @@ public class PostsDAO extends BaseDAO<posts> {
     public ArrayList<posts> getListpostsWithPage(int page, int page_size) {
         ArrayList<posts> listposts = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM posts WHERE uid_posts IS NULL AND status = 0 ORDER BY id OFFSET (?-1)*? ROW FETCH NEXT ? ROWS ONLY ";
+            String sql = "SELECT * FROM posts WHERE uid_posts IS NULL AND status = 0 ORDER BY id DESC OFFSET (?-1)*? ROW FETCH NEXT ? ROWS ONLY";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, page);
             statement.setInt(2, page_size);
@@ -79,6 +79,35 @@ public class PostsDAO extends BaseDAO<posts> {
             Logger.getLogger(PostsDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listposts;
+    }
+
+    public int countPosts() {
+        try {
+            String sql = "SELECT COUNT(*) FROM posts WHERE uid_posts IS NULL AND status = 0";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+    public int countComment(String id) {
+        try {
+            String sql = "SELECT COUNT(*) FROM posts WHERE uid_posts = ? AND status = 0";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PostsDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
 
     public ArrayList<posts> getListpostsNotification() {
@@ -143,7 +172,7 @@ public class PostsDAO extends BaseDAO<posts> {
     public ArrayList<posts> getCommentWithPage(String id, int page, int page_size) {
         ArrayList<posts> listComment = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM posts WHERE uid_posts = ? ORDER BY id OFFSET (?-1)*? ROW FETCH NEXT ? ROWS ONLY ";
+            String sql = "SELECT * FROM posts WHERE uid_posts = ? ORDER BY id OFFSET (?-1)*? ROW FETCH NEXT ? ROWS ONLY";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, id);
             statement.setInt(2, page);
@@ -394,8 +423,8 @@ public class PostsDAO extends BaseDAO<posts> {
 
     public static void main(String[] args) {
         PostsDAO dao = new PostsDAO();
-        dao.updateUserIDLike("65", "1");
-        System.out.println(dao.getposts("65"));
+        //dao.updateUserIDLike("65", "1");
+        System.out.println(dao.getListpostsWithPage(2, 10));
 
     }
 

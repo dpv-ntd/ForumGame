@@ -64,9 +64,26 @@ public class HomeController extends HttpServlet {
             throws ServletException, IOException {
         PostsDAO daoPosts = new PostsDAO();
         PlayerDAO daoPlayer = new PlayerDAO();
-        ArrayList<posts> listposts = daoPosts.getListposts();
+
+        int page = 1;
+        int page_size = 15;
+
+        String pageStr = request.getParameter("page");
+        if (pageStr != null) {
+            page = Integer.parseInt(pageStr);
+        }
+        int countPosts = daoPosts.countPosts();
+        int totalPage = countPosts / page_size;
+        if (countPosts % page_size != 0) {
+            totalPage += 1;
+        }
+
+        ArrayList<posts> listposts = daoPosts.getListpostsWithPage(page, page_size);
         ArrayList<posts> listpostsNotification = daoPosts.getListpostsNotification();
         ArrayList<player> listplayer = daoPlayer.getListplayer();
+
+        request.setAttribute("page", page);
+        request.setAttribute("totalPage", totalPage);
         request.setAttribute("listposts", listposts);
         request.setAttribute("listpostsNotification", listpostsNotification);
         request.setAttribute("listplayer", listplayer);

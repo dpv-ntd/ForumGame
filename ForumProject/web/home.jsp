@@ -209,12 +209,46 @@
                 <div class="col">
                     <a style="background-color: #F44336; color: white" class="btn btn-sm btn-danger" href="new-posts">Đăng bài mới</a>
                 </div>
-                <div class="col text-right">
-                    <a href="/box/0/1" class="btn btn-sm" style="background-color: #561D00; color: white"> 1 </a>
-                    <a href="/box/0/2" class="btn btn-sm" style="background-color: white; color: #561D00">2</a>
-                    <a href="/box/0/3" class="btn btn-sm" style="background-color: white; color: #561D00">3</a>
-                    <a href="/box/0/2" class="btn btn-sm" style="background-color: white; color: #561D00">></a>
-                </div>
+
+                <c:if test="${totalPage == 2}">
+                    <div class="col text-right">
+                        <c:if test="${page == 1}">
+                            <a class="btn btn-sm" style="background-color: #561D00; color: white">1</a>
+                            <a href="home?page=${page+1}" class="btn btn-sm" style="background-color: white; color: #561D00">${page+1}</a>
+                            <a href="home?page=${page+1}" class="btn btn-sm" style="background-color: white; color: #561D00">></a>
+                        </c:if>
+                        <c:if test="${page == totalPage}">
+                            <a href="home?page=${page-1}" class="btn btn-sm" style="background-color: white; color: #561D00"><</a>
+                            <a href="home?page=${page-1}" class="btn btn-sm" style="background-color: white; color: #561D00">${page-1}</a>
+                            <a class="btn btn-sm" style="background-color: #561D00; color: white">${page}</a>
+                        </c:if>
+                    </div>
+                </c:if>
+                <c:if test="${totalPage > 2}">
+                    <div class="col text-right">
+                        <c:if test="${page == 1}">
+                            <a class="btn btn-sm" style="background-color: #561D00; color: white">1</a>
+                            <a href="home?page=${page+1}" class="btn btn-sm" style="background-color: white; color: #561D00">${page+1}</a>
+                            <a href="home?page=${page+2}" class="btn btn-sm" style="background-color: white; color: #561D00">${page+2}</a>
+                            <a href="home?page=${page+1}" class="btn btn-sm" style="background-color: white; color: #561D00">></a>
+                        </c:if>
+                        <c:if test="${page > 1 && page < totalPage}">
+                            <a href="home?page=${page-1}" class="btn btn-sm" style="background-color: white; color: #561D00"><</a>
+                            <a href="home?page=${page-1}" class="btn btn-sm" style="background-color: white; color: #561D00">${page-1}</a>
+                            <a class="btn btn-sm" style="background-color: #561D00; color: white">${page}</a>
+                            <a href="home?page=${page+1}" class="btn btn-sm" style="background-color: white; color: #561D00">${page+1}</a>
+                            <a href="home?page=${page+1}" class="btn btn-sm" style="background-color: white; color: #561D00">></a>
+                        </c:if>
+                        <c:if test="${page == totalPage}">
+                            <a href="home?page=${page-1}" class="btn btn-sm" style="background-color: white; color: #561D00"><</a>
+                            <a href="home?page=${page-2}" class="btn btn-sm" style="background-color: white; color: #561D00">${page-2}</a>
+                            <a href="home?page=${page-1}" class="btn btn-sm" style="background-color: white; color: #561D00">${page-1}</a>
+                            <a class="btn btn-sm" style="background-color: #561D00; color: white">${page}</a>
+                        </c:if>
+                    </div>
+                </c:if>
+
+
             </div>
 
         </div>
@@ -225,4 +259,3 @@
 
     <!-- Bootstrap core JavaScript -->
 
-    <script src="https://nroblue.com/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

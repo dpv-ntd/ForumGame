@@ -20,10 +20,10 @@
             <a href="home" class="btn btn-sm" style="background-color: #FFAF4C; color: #561D00">Diễn đàn</a>
         </div>
         <div class="col">
-            <a href="/box/1" class="btn btn-sm" style="background-color: #924C31; color: white">Góp ý</a>
+            <a href="" class="btn btn-sm" style="background-color: #924C31; color: white">Góp ý</a>
         </div>
         <div class="col">
-            <a href="/box/2" class="btn btn-sm" style="background-color: #924C31; color: white">Báo lỗi</a>
+            <a href="" class="btn btn-sm" style="background-color: #924C31; color: white">Báo lỗi</a>
         </div>
     </div>
 

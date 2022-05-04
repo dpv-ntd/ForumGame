@@ -4,13 +4,8 @@
  */
 package Controller;
 
-import DAL.PlayerDAO;
-import DAL.PostsDAO;
-import Model.player;
-import Model.posts;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author DPV
  */
-@WebServlet(name = "TopicController", urlPatterns = {"/topic"})
-public class TopicController extends HttpServlet {
+@WebServlet(name = "TermsController", urlPatterns = {"/terms"})
+public class TermsController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +36,10 @@ public class TopicController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet TopicController</title>");
+            out.println("<title>Servlet TermsController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet TopicController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet TermsController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,41 +57,7 @@ public class TopicController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        PostsDAO daoPosts = new PostsDAO();
-        PlayerDAO daoPlayer = new PlayerDAO();
-
-        String id = request.getParameter("id");
-        if (id == null) {
-            response.sendRedirect("home");
-            return;
-        }
-
-        int page = 1;
-        int page_size = 15;
-
-        String pageStr = request.getParameter("page");
-        if (pageStr != null) {
-            page = Integer.parseInt(pageStr);
-        }
-        int countComment = daoPosts.countComment(id);
-        int totalPage = countComment / page_size;
-        if (countComment % page_size != 0) {
-            totalPage += 1;
-        }
-
-        daoPosts.updateView(id);
-        posts getposts = daoPosts.getposts(id);
-        ArrayList<player> listplayer = daoPlayer.getListplayer();
-        ArrayList<posts> listComment = daoPosts.getCommentWithPage(id, page, page_size);
-        request.getSession().setAttribute("urlPrev", "topic?id=" + id + "&&page=" + page);
-        
-        request.setAttribute("page", page);
-        request.setAttribute("totalPage", totalPage);
-        request.setAttribute("getposts", getposts);
-        request.setAttribute("listplayer", listplayer);
-        request.setAttribute("listComment", listComment);
-        request.getRequestDispatcher("topic.jsp").forward(request, response);
+        request.getRequestDispatcher("terms.jsp").forward(request, response);
     }
 
     /**
@@ -110,23 +71,7 @@ public class TopicController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        request.setCharacterEncoding("UTF-8");
-        response.setCharacterEncoding("UTF-8");
-
-        PlayerDAO daoPlayer = new PlayerDAO();
-        PostsDAO daoPosts = new PostsDAO();
-
-        String topicID = request.getParameter("topicID");
-        String userID = request.getParameter("userID");
-        String timeCmt = request.getParameter("timeCmt");
-        String content = request.getParameter("content");
-
-        daoPosts.createComment(topicID, userID, content, timeCmt);
-        daoPlayer.updatePosts(userID);
-
-        response.sendRedirect("topic?id=" + topicID);
-
+        processRequest(request, response);
     }
 
     /**

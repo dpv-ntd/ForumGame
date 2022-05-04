@@ -33,7 +33,7 @@
                         </div>
                         <div class="form-check-inline">
                             <label class="form-check-label">
-                                <input type="checkbox" class="form-check-input" value="accept" name="accept" id="accept" checked="checked"> Chấp nhận <a href="/dieu-khoan">Điều khoản sử dụng</a>
+                                <input type="checkbox" class="form-check-input" value="accept" name="accept" id="accept" checked="checked"> Chấp nhận <a href="terms">Điều khoản sử dụng</a>
                             </label>
                         </div>
                         <div id="notify" class="text-danger form-group">
@@ -54,6 +54,3 @@
 
     </body>
 
-    <!-- Bootstrap core JavaScript -->
-
-    <script src="https://nroblue.com/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

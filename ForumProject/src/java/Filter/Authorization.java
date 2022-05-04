@@ -110,11 +110,7 @@ public class Authorization implements Filter {
         String urlPrev = (String) req.getSession().getAttribute("urlPrev");
 
         if (player != null) {
-            if (player.getAdmin() == 1 || player.getAdmin() == 2 || player.getAdmin() == 3) {
-                chain.doFilter(request, response);
-            } else {
-                res.sendRedirect(urlPrev);
-            }
+            chain.doFilter(request, response);
         } else {
             res.sendRedirect("login");
         }

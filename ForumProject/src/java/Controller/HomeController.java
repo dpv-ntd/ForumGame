@@ -87,6 +87,7 @@ public class HomeController extends HttpServlet {
         request.setAttribute("listposts", listposts);
         request.setAttribute("listpostsNotification", listpostsNotification);
         request.setAttribute("listplayer", listplayer);
+        request.getSession().setAttribute("urlPrev", "home");
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }
 

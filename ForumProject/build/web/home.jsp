@@ -207,7 +207,9 @@
 
             <div class="row mt-3">
                 <div class="col">
-                    <a style="background-color: #F44336; color: white" class="btn btn-sm btn-danger" href="new-posts">Đăng bài mới</a>
+                    <c:if test="${sessionScope.player != null}">
+                        <a style="background-color: #F44336; color: white" class="btn btn-sm btn-danger" href="new-posts">Đăng bài mới</a>
+                    </c:if>
                 </div>
 
                 <c:if test="${totalPage == 2}">
